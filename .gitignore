@@ -1,0 +1,60 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.docker
+.env.testing
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Custom patterns for ignoring specific files and directories
+tmp/
+main.exe
+build-errors.log
+backend/tmp/build-errors.log
+**/main
+bin/
+dist/
+
+# Logs
+*.log
+logs/
+
+# Test coverage
+coverage.out
+coverage.html
+*.coverprofile
+test-report.json
+.trivycache/
+
+# Swagger generated docs (committed to repo for CI/CD)
+# To regenerate: swag init
+
+# Air tmp files
+.air/golang_starter_kit_2025

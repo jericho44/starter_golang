@@ -1,0 +1,10 @@
+-- +++ UP Migration
+CREATE TABLE permissions (
+    id BIGSERIAL PRIMARY KEY,
+    permission VARCHAR(255) NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP NULL DEFAULT NULL
+);
+-- --- DOWN Migration
+DROP TABLE IF EXISTS permissions;

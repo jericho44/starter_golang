@@ -1,0 +1,1315 @@
+definitions:
+  casts.Token:
+    properties:
+      expired_at:
+        type: string
+      expires_in:
+        type: integer
+      refresh_token:
+        type: string
+      token:
+        type: string
+      token_type:
+        type: string
+    type: object
+  helpers.ResponseParams-any:
+    properties:
+      data:
+        items: {}
+        type: array
+      errors:
+        additionalProperties:
+          type: string
+        type: object
+      item: {}
+      message:
+        type: string
+      reference:
+        type: string
+      status:
+        type: string
+      token:
+        $ref: '#/definitions/casts.Token'
+      total:
+        type: integer
+    type: object
+  helpers.ResponseParams-models_Permission:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.Permission'
+        type: array
+      errors:
+        additionalProperties:
+          type: string
+        type: object
+      item:
+        $ref: '#/definitions/models.Permission'
+      message:
+        type: string
+      reference:
+        type: string
+      status:
+        type: string
+      token:
+        $ref: '#/definitions/casts.Token'
+      total:
+        type: integer
+    type: object
+  helpers.ResponseParams-models_Product:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.Product'
+        type: array
+      errors:
+        additionalProperties:
+          type: string
+        type: object
+      item:
+        $ref: '#/definitions/models.Product'
+      message:
+        type: string
+      reference:
+        type: string
+      status:
+        type: string
+      token:
+        $ref: '#/definitions/casts.Token'
+      total:
+        type: integer
+    type: object
+  helpers.ResponseParams-models_Role:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.Role'
+        type: array
+      errors:
+        additionalProperties:
+          type: string
+        type: object
+      item:
+        $ref: '#/definitions/models.Role'
+      message:
+        type: string
+      reference:
+        type: string
+      status:
+        type: string
+      token:
+        $ref: '#/definitions/casts.Token'
+      total:
+        type: integer
+    type: object
+  models.Category:
+    properties:
+      category:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Permission:
+    properties:
+      group:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  models.Product:
+    properties:
+      category:
+        $ref: '#/definitions/models.Category'
+      category_id:
+        type: integer
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      images:
+        items:
+          type: string
+        type: array
+      margin:
+        type: number
+      name:
+        type: string
+      price:
+        type: number
+      received_at:
+        type: string
+      reference:
+        type: string
+      sold:
+        type: integer
+      stock:
+        type: integer
+      store_id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Role:
+    properties:
+      group:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      permissions:
+        items:
+          $ref: '#/definitions/models.Permission'
+        type: array
+      users:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+    type: object
+  models.Test:
+    properties:
+      age:
+        type: integer
+      birth_date:
+        type: string
+      data_json:
+        type: string
+      description:
+        type: string
+      file_bytea:
+        items:
+          type: integer
+        type: array
+      id:
+        type: integer
+      ip_address:
+        type: string
+      is_active:
+        type: boolean
+      login_time:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  models.User:
+    properties:
+      email:
+        type: string
+      email_verified_at:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      pin:
+        type: string
+      reference:
+        type: string
+      username:
+        type: string
+    type: object
+  requests.CategoryRequest:
+    properties:
+      category:
+        example: Electronics
+        type: string
+      id:
+        type: integer
+    required:
+    - category
+    type: object
+  requests.ForgotPasswordRequest:
+    properties:
+      email:
+        example: user@example.com
+        type: string
+    required:
+    - email
+    type: object
+  requests.LoginRequest:
+    properties:
+      email:
+        example: user@mail.com
+        type: string
+      password:
+        example: "12345678"
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  requests.PermissionRequest:
+    properties:
+      group:
+        example: User
+        type: string
+      id:
+        type: integer
+      name:
+        example: Create User
+        type: string
+    required:
+    - group
+    - name
+    type: object
+  requests.ProductRequest:
+    properties:
+      category_id:
+        example: 2
+        type: integer
+      description:
+        example: A brief description of the product
+        type: string
+      id:
+        type: integer
+      images:
+        items:
+          type: string
+        type: array
+      margin:
+        example: 10
+        type: number
+      name:
+        example: Product Name
+        type: string
+      price:
+        example: 99.99
+        type: number
+      received_at:
+        example: "2023-10-10T00:00:00Z"
+        type: string
+      reference:
+        example: PRD001
+        type: string
+      sold:
+        example: 10
+        type: integer
+      stock:
+        example: 100
+        type: integer
+      store_id:
+        example: 1
+        type: integer
+    required:
+    - category_id
+    - name
+    - price
+    - store_id
+    type: object
+  requests.RefreshTokenRequest:
+    properties:
+      refresh_token:
+        type: string
+    required:
+    - refresh_token
+    type: object
+  requests.ResetPasswordRequest:
+    properties:
+      new_password:
+        example: newSecurePassword123
+        minLength: 8
+        type: string
+      token:
+        example: a1b2c3d4...
+        maxLength: 64
+        minLength: 64
+        type: string
+    required:
+    - new_password
+    - token
+    type: object
+  requests.RoleRequestPut:
+    properties:
+      group:
+        example: User
+        type: string
+      id:
+        type: integer
+      name:
+        example: Admin
+        type: string
+    required:
+    - group
+    - name
+    type: object
+info:
+  contact: {}
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Hello World
+          schema:
+            type: string
+      summary: Show a hello world message
+      tags:
+      - root
+  /api/database/health:
+    get:
+      description: Perform a health check on all configured database connections
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Health check results
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Database health check
+      tags:
+      - Database
+  /api/database/status:
+    get:
+      description: Get the status and statistics of all configured database connections
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Connection status and statistics
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get database connection status
+      tags:
+      - Database
+  /api/database/test:
+    get:
+      description: Test a specific database connection by name
+      parameters:
+      - description: Connection name (mysql, postgres, mysql_secondary)
+        in: query
+        name: connection
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Connection test result
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Test database connection
+      tags:
+      - Database
+  /api/v1/auth/forgot-password:
+    post:
+      consumes:
+      - application/json
+      description: Send password reset email to user
+      parameters:
+      - description: Forgot Password Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.ForgotPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Reset email sent successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Request password reset
+      tags:
+      - auth
+  /api/v1/auth/github:
+    get:
+      description: Redirects user to GitHub OAuth2 authorization page
+      produces:
+      - application/json
+      responses:
+        "307":
+          description: Redirect to GitHub OAuth
+          schema:
+            type: string
+      summary: Login with GitHub OAuth2
+      tags:
+      - OAuth
+  /api/v1/auth/google:
+    get:
+      description: Redirects user to Google OAuth2 consent page
+      produces:
+      - application/json
+      responses:
+        "307":
+          description: Redirect to Google OAuth
+          schema:
+            type: string
+      summary: Login with Google OAuth2
+      tags:
+      - OAuth
+  /api/v1/auth/reset-password:
+    post:
+      consumes:
+      - application/json
+      description: Reset user password using valid reset token
+      parameters:
+      - description: Reset Password Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.ResetPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Password reset successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request or token
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Reset password with token
+      tags:
+      - auth
+  /api/v1/storage/{filename}:
+    delete:
+      description: Delete a file from S3/MinIO storage
+      parameters:
+      - description: Filename
+        in: path
+        name: filename
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete file from storage
+      tags:
+      - Storage
+  /api/v1/storage/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload a file to S3/MinIO storage
+      parameters:
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      - default: general
+        description: Upload folder
+        in: formData
+        name: folder
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Upload file to storage
+      tags:
+      - Storage
+  /api/v1/storage/url/{filename}:
+    get:
+      description: Get a temporary presigned URL for accessing a file
+      parameters:
+      - description: Filename
+        in: path
+        name: filename
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get presigned file URL
+      tags:
+      - Storage
+  /auth/login:
+    put:
+      consumes:
+      - application/json
+      description: API untuk login dengan email dan password
+      parameters:
+      - description: Login data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/requests.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.ResponseParams-any'
+      summary: Login
+      tags:
+      - Auth
+  /auth/logout:
+    get:
+      consumes:
+      - application/json
+      description: API untuk logout, membutuhkan token yang valid
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.ResponseParams-any'
+      summary: Logout
+      tags:
+      - Auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: API untuk refresh token menggunakan refresh token
+      parameters:
+      - description: Refresh token
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/requests.RefreshTokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.ResponseParams-any'
+      summary: Refresh Token
+      tags:
+      - Auth
+  /categories:
+    get:
+      description: Retrieve a list of all categories, including related products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of categories with products
+          schema:
+            items:
+              $ref: '#/definitions/models.Category'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - Bearer: []
+      summary: List all categories
+      tags:
+      - categories
+    put:
+      consumes:
+      - application/json
+      description: Create a new category or update an existing one by ID
+      parameters:
+      - description: Category Data
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/requests.CategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Created or updated category
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: Invalid input data
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - Bearer: []
+      summary: Create or update a category
+      tags:
+      - categories
+  /categories/{id}:
+    delete:
+      description: Delete a specific category by its ID
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Category deleted successfully
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Category not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - Bearer: []
+      summary: Delete a category by ID
+      tags:
+      - categories
+    get:
+      description: Retrieve a category by its ID, including related products
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Category with products
+          schema:
+            $ref: '#/definitions/models.Category'
+        "404":
+          description: Category not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - Bearer: []
+      summary: Get a category by ID
+      tags:
+      - categories
+  /file/{key}/{filename}:
+    get:
+      consumes:
+      - application/json
+      description: Serve file
+      parameters:
+      - description: Signature
+        in: query
+        name: signature
+        type: string
+      - description: File key
+        in: path
+        name: key
+        required: true
+        type: string
+      - description: File path
+        in: path
+        name: path
+        required: true
+        type: string
+      produces:
+      - image/jpeg
+      responses:
+        "200":
+          description: File
+          schema:
+            type: string
+      summary: Serve file
+      tags:
+      - File
+  /file/public/{key}/{filename}:
+    get:
+      consumes:
+      - application/json
+      description: Serve file directly without JWT authentication
+      parameters:
+      - description: File key
+        in: path
+        name: key
+        required: true
+        type: string
+      - description: File name
+        in: path
+        name: filename
+        required: true
+        type: string
+      produces:
+      - image/jpeg
+      responses:
+        "200":
+          description: File
+          schema:
+            type: file
+        "404":
+          description: File not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Serve file without authentication
+      tags:
+      - File
+  /permissions:
+    get:
+      consumes:
+      - application/json
+      description: API untuk mendapatkan semua Permission
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.ResponseParams-models_Permission'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Permission'
+                  type: array
+              type: object
+      summary: Get All Permissions
+      tags:
+      - Permission
+    put:
+      consumes:
+      - application/json
+      description: API untuk mengupdate atau membuat Permission
+      parameters:
+      - description: Permission Data
+        in: body
+        name: permission
+        required: true
+        schema:
+          $ref: '#/definitions/requests.PermissionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.ResponseParams-models_Permission'
+            - properties:
+                item:
+                  $ref: '#/definitions/models.Permission'
+              type: object
+      summary: Create/Update Permission
+      tags:
+      - Permission
+  /permissions/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: API untuk menghapus Permission berdasarkan ID
+      parameters:
+      - description: Permission ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.ResponseParams-models_Permission'
+      summary: Delete Permission
+      tags:
+      - Permission
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: API untuk mendapatkan semua produk
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: offset
+        type: integer
+      - in: query
+        name: order_by
+        type: string
+      - enum:
+        - asc
+        - desc
+        in: query
+        name: order_direction
+        type: string
+      - in: query
+        name: page
+        type: integer
+      - in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.ResponseParams-models_Product'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Product'
+                  type: array
+              type: object
+      summary: Get all products
+      tags:
+      - Product
+    put:
+      consumes:
+      - application/json
+      description: API untuk membuat atau mengupdate produk
+      parameters:
+      - description: Product request body
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/requests.ProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.ResponseParams-models_Product'
+            - properties:
+                item:
+                  $ref: '#/definitions/models.Product'
+              type: object
+      summary: Create/Update product
+      tags:
+      - Product
+  /products/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: API untuk menghapus produk
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.ResponseParams-models_Product'
+      summary: Delete product
+      tags:
+      - Product
+    get:
+      consumes:
+      - application/json
+      description: API untuk mendapatkan produk berdasarkan ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.ResponseParams-models_Product'
+            - properties:
+                item:
+                  $ref: '#/definitions/models.Product'
+              type: object
+      summary: Get product by ID
+      tags:
+      - Product
+  /roles:
+    get:
+      consumes:
+      - application/json
+      description: API untuk mendapatkan semua Role
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.ResponseParams-models_Role'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Role'
+                  type: array
+              type: object
+      summary: Get All Roles
+      tags:
+      - Role
+    put:
+      consumes:
+      - application/json
+      description: API untuk mengupdate atau membuat Role
+      parameters:
+      - description: Role Data
+        in: body
+        name: role
+        required: true
+        schema:
+          $ref: '#/definitions/requests.RoleRequestPut'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/helpers.ResponseParams-models_Role'
+            - properties:
+                item:
+                  $ref: '#/definitions/models.Role'
+              type: object
+      summary: Create/Update Role
+      tags:
+      - Role
+  /roles/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: API untuk menghapus Role
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helpers.ResponseParams-any'
+      summary: Delete Role
+      tags:
+      - Role
+  /tests:
+    get:
+      description: Get all test records from PostgreSQL
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Test'
+            type: array
+      summary: Get all test data
+      tags:
+      - Test Postgres
+    post:
+      consumes:
+      - application/json
+      description: Create a new test record in PostgreSQL
+      parameters:
+      - description: Test Data
+        in: body
+        name: test
+        required: true
+        schema:
+          $ref: '#/definitions/models.Test'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Test'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create new test
+      tags:
+      - Test Postgres
+  /tests/{id}:
+    delete:
+      description: Delete a test record in PostgreSQL
+      parameters:
+      - description: Test ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete test
+      tags:
+      - Test Postgres
+    get:
+      description: Get a test record by ID from PostgreSQL
+      parameters:
+      - description: Test ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Test'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get test by ID
+      tags:
+      - Test Postgres
+    put:
+      consumes:
+      - application/json
+      description: Update a test record in PostgreSQL
+      parameters:
+      - description: Test ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Test Data
+        in: body
+        name: test
+        required: true
+        schema:
+          $ref: '#/definitions/models.Test'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Test'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update test
+      tags:
+      - Test Postgres
+  /users:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+      summary: Show all users
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User object
+        in: body
+        name: JSON
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Upsert a user
+      tags:
+      - users
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: User deleted
+          schema:
+            type: string
+      summary: Delete a user
+      tags:
+      - users
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Show a user
+      tags:
+      - users
+security:
+- X-Api-Key: []
+- Bearer: []
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+  X-Api-Key:
+    in: header
+    name: X-Api-Key
+    type: apiKey
+swagger: "2.0"
