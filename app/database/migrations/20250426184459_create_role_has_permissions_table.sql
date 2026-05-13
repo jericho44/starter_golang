@@ -1,12 +1,13 @@
 -- +++ UP Migration
 CREATE TABLE role_has_permissions (
 	id BIGSERIAL PRIMARY KEY,
+    uuid UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
     role_id BIGINT NOT NULL,
     permission_id BIGINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
-    FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE 
+    FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE
 );
 -- --- DOWN Migration
 DROP TABLE IF EXISTS role_has_permissions;

@@ -1,6 +1,7 @@
 -- +++ UP Migration
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
+    uuid UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
     reference VARCHAR(100) UNIQUE NOT NULL,
     username VARCHAR(100) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,

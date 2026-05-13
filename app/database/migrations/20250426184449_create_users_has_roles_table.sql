@@ -1,6 +1,7 @@
 -- +++ UP Migration
 CREATE TABLE users_has_roles (
 	id BIGSERIAL PRIMARY KEY,
+    uuid UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
     user_id BIGINT NOT NULL,
     role_id BIGINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

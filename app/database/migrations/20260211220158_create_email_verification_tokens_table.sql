@@ -1,6 +1,7 @@
 -- +++ UP Migration
 CREATE TABLE email_verification_tokens (
 	id BIGSERIAL PRIMARY KEY,
+    uuid UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	user_id BIGINT NOT NULL,
 	token VARCHAR(255) NOT NULL UNIQUE,
 	expires_at TIMESTAMP NOT NULL,

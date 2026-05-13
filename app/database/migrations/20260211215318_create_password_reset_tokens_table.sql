@@ -1,6 +1,7 @@
 -- +++ UP Migration
 CREATE TABLE password_reset_tokens (
 	id BIGSERIAL PRIMARY KEY,
+    uuid UUID NOT NULL UNIQUE DEFAULT gen_random_uuid(),
 	email VARCHAR(255) NOT NULL,
 	token VARCHAR(255) NOT NULL UNIQUE,
 	expires_at TIMESTAMP NOT NULL,
